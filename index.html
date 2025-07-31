@@ -3,932 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi Tool Hub</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Multi Tool Hub - 100+ Free Online Tools</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom CSS for Inter font and general body styling */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Light gray background */
-            color: #374151; /* Dark gray text */
-        }
-        /* Custom scrollbar for better aesthetics */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-        /* Style for the message box */
-        #messageBox {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #4CAF50; /* Green background */
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            display: none; /* Hidden by default */
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            text-align: center;
-        }
-        #messageBox.show {
-            display: block;
-            opacity: 1;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .tool-card:hover { transform: translateY(-4px); transition: all 0.3s ease; }
+        .category-tab.active { background: #667eea; color: white; }
     </style>
 </head>
-<body class="antialiased">
-    <!-- Navbar -->
-    <nav class="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 shadow-lg">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-white text-3xl font-extrabold rounded-lg px-3 py-1 hover:bg-blue-700 transition duration-300" onclick="showHomePage()">Multi Tool Hub</a>
-            <!-- Mobile Menu Button (Hamburger) -->
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-white focus:outline-none">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4"></path>
-                    </svg>
-                </button>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white">
+        <div class="container mx-auto px-6 py-16">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold mb-4">Multi Tool Hub</h1>
+                <p class="text-xl mb-8 opacity-90">100+ Free Online Tools - All Browser-Based & Mobile-Friendly</p>
+                <div class="max-w-2xl mx-auto">
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="Search tools..." 
+                               class="w-full px-6 py-4 text-gray-800 rounded-full text-lg focus:outline-none focus:ring-4 focus:ring-white/30">
+                        <button class="absolute right-2 top-2 bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors">
+                            Search
+                        </button>
+                    </div>
+                </div>
             </div>
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-6">
-                <a href="#pdf-tools" class="text-white text-lg font-medium hover:text-blue-200 transition duration-300">PDF Tools</a>
-                <a href="#image-tools" class="text-white text-lg font-medium hover:text-blue-200 transition duration-300">Image Tools</a>
-                <a href="#ebook-tools" class="text-white text-lg font-medium hover:text-blue-200 transition duration-300">eBook Tools</a>
-                <a href="#other-tools" class="text-white text-lg font-medium hover:text-blue-200 transition duration-300">Other Tools</a>
-            </div>
-        </div>
-        <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-blue-700 mt-2 rounded-md">
-            <a href="#pdf-tools" class="block py-2 px-4 text-white hover:bg-blue-600 rounded-md transition duration-300">PDF Tools</a>
-            <a href="#image-tools" class="block py-2 px-4 text-white hover:bg-blue-600 rounded-md transition duration-300">Image Tools</a>
-            <a href="#ebook-tools" class="block py-2 px-4 text-white hover:bg-blue-600 rounded-md transition duration-300">eBook Tools</a>
-            <a href="#other-tools" class="block py-2 px-4 text-white hover:bg-blue-600 rounded-md transition duration-300">Other Tools</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header id="hero-section" class="bg-gradient-to-br from-blue-500 to-indigo-600 text-white py-20 text-center shadow-inner">
-        <div class="container mx-auto px-4">
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">Your Ultimate Digital Toolkit</h1>
-            <p class="text-xl md:text-2xl mb-8 opacity-90">Effortlessly manage your PDFs, images, and more with our comprehensive suite of tools.</p>
-            <a href="#tools-section" class="bg-white text-blue-600 hover:bg-blue-100 px-8 py-4 rounded-full text-xl font-semibold shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">Explore All Tools</a>
         </div>
     </header>
 
-    <!-- Main Content - Tools Section (Home Page Content) -->
-    <main id="home-content" class="container mx-auto px-4 py-16">
-        <!-- PDF Tools Section -->
-        <section id="pdf-tools" class="mb-16">
-            <h2 class="text-4xl font-bold text-center mb-10 text-blue-700">PDF Tools</h2>
-
-            <!-- OPTIMIZE PDF -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">Optimize PDF</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Compress PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Compress PDF</h4>
-                        <p class="text-gray-600">Reduce PDF file size without losing quality.</p>
-                    </div>
-                </div>
+    <!-- Category Tabs -->
+    <div class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap gap-2 py-4" id="categoryTabs">
+                <button class="category-tab active px-6 py-2 rounded-full bg-gray-200 hover:bg-blue-100 transition-colors" data-category="all">All Tools</button>
+                <button class="category-tab px-6 py-2 rounded-full bg-gray-200 hover:bg-blue-100 transition-colors" data-category="image">Image Tools</button>
+                <button class="category-tab px-6 py-2 rounded-full bg-gray-200 hover:bg-blue-100 transition-colors" data-category="seo">SEO Tools</button>
+                <button class="category-tab px-6 py-2 rounded-full bg-gray-200 hover:bg-blue-100 transition-colors" data-category="text">Text Utilities</button>
+                <button class="category-tab px-6 py-2 rounded-full bg-gray-200 hover:bg-blue-100 transition-colors" data-category="developer">Developer Tools</button>
+                <button class="category-tab px-6 py-2 rounded-full bg-gray-200 hover:bg-blue-100 transition-colors" data-category="converter">Converters</button>
+                <button class="category-tab px-6 py-2 rounded-full bg-gray-200 hover:bg-blue-100 transition-colors" data-category="calculator">Calculators</button>
             </div>
-
-            <!-- MERGE & SPLIT -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">Merge & Split</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Merge PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Merge PDF</h4>
-                        <p class="text-gray-600">Combine multiple PDF files into one.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Merge PDF and Image')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Merge PDF and Image</h4>
-                        <p class="text-gray-600">Integrate images directly into your PDF document.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Split PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Split PDF</h4>
-                        <p class="text-gray-600">Divide a PDF into multiple smaller files.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- VIEW & EDIT -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">View & Edit</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Crop PDF Page')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Crop PDF Page</h4>
-                        <p class="text-gray-600">Adjust the visible area of PDF pages.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Organize PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Organize PDF</h4>
-                        <p class="text-gray-600">Rearrange, add, or delete PDF pages.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Rotate PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Rotate PDF</h4>
-                        <p class="text-gray-600">Rotate PDF pages to the correct orientation.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Remove PDF Pages')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Remove PDF Pages</h4>
-                        <p class="text-gray-600">Delete unwanted pages from your PDF.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Extract PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Extract PDF</h4>
-                        <p class="text-gray-600">Pull out specific pages or content from a PDF.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Extract Images')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Extract Images</h4>
-                        <p class="text-gray-600">Save images embedded in a PDF document.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Add Page Number')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Add Page Number</h4>
-                        <p class="text-gray-600">Insert page numbers into your PDF.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Add Watermark')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Add Watermark</h4>
-                        <p class="text-gray-600">Apply text or image watermarks to your PDF.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CONVERT TO PDF -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">Convert To PDF</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Image to PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Image to PDF</h4>
-                        <p class="text-gray-600">Convert various image formats to PDF.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('JPG to PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">JPG to PDF</h4>
-                        <p class="text-gray-600">Transform JPG images into PDF documents.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Word to PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Word to PDF</h4>
-                        <p class="text-gray-600">Convert Microsoft Word documents to PDF.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Powerpoint to PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Powerpoint to PDF</h4>
-                        <p class="text-gray-600">Turn Powerpoint presentations into PDF files.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Excel to PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Excel to PDF</h4>
-                        <p class="text-gray-600">Convert Excel spreadsheets to PDF format.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Text to PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Text to PDF</h4>
-                        <p class="text-gray-600">Convert plain text files into PDF documents.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CONVERT FROM PDF -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">Convert From PDF</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('PDF to Image')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">PDF to Image</h4>
-                        <p class="text-gray-600">Convert PDF pages into various image formats.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('PDF to JPG')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">PDF to JPG</h4>
-                        <p class="text-gray-600">Convert PDF pages into JPG images.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('PDF to Word')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">PDF to Word</h4>
-                        <p class="text-gray-600">Convert PDF documents back to editable Word files.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('PDF to Powerpoint')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">PDF to Powerpoint</h4>
-                        <p class="text-gray-600">Convert PDF files into Powerpoint presentations.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('PDF to Excel')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">PDF to Excel</h4>
-                        <p class="text-gray-600">Extract data from PDF and convert to Excel spreadsheets.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('PDF to Text')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">PDF to Text</h4>
-                        <p class="text-gray-600">Convert PDF content into plain text.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PDF SECURITY -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">PDF Security</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Unlock PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Unlock PDF</h4>
-                        <p class="text-gray-600">Remove password protection from PDF files.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Protect PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Protect PDF</h4>
-                        <p class="text-gray-600">Add password encryption to your PDF documents.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Image Tools Section -->
-        <section id="image-tools" class="mb-16">
-            <h2 class="text-4xl font-bold text-center mb-10 text-blue-700">Image Tools</h2>
-
-            <!-- OPTIMIZE IMAGE -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">Optimize Image</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Compress Image')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Compress Image</h4>
-                        <p class="text-gray-600">Reduce the file size of various image formats.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Compress JPG')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Compress JPG</h4>
-                        <p class="text-gray-600">Optimize JPG images for smaller file size.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Compress PNG')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Compress PNG</h4>
-                        <p class="text-gray-600">Compress PNG images while maintaining transparency.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Compress JPEG')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Compress JPEG</h4>
-                        <p class="text-gray-600">Efficiently compress JPEG images.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Compress WEBP')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Compress WEBP</h4>
-                        <p class="text-gray-600">Reduce the size of WEBP image files.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Compress HEIC')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Compress HEIC</h4>
-                        <p class="text-gray-600">Compress HEIC images for storage and sharing.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Compress BMP')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Compress BMP</h4>
-                        <p class="text-gray-600">Compress BMP images for better efficiency.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CONVERT IMAGE -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">Convert Image</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Image to JPG')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Image to JPG</h4>
-                        <p class="text-gray-600">Convert various image formats to JPG.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Image to PNG')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Image to PNG</h4>
-                        <p class="text-gray-600">Convert various image formats to PNG.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Image to JPEG')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Image to JPEG</h4>
-                        <p class="text-gray-600">Convert various image formats to JPEG.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Image to WEBP')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Image to WEBP</h4>
-                        <p class="text-gray-600">Convert various image formats to WEBP.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('WEBP to JPEG')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">WEBP to JPEG</h4>
-                        <p class="text-gray-600">Convert WEBP images to JPEG format.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('HEIC to JPEG')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">HEIC to JPEG</h4>
-                        <p class="text-gray-600">Convert HEIC images to JPEG format.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- EDIT IMAGE -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">Edit Image</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Image Crop')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Image Crop</h4>
-                        <p class="text-gray-600">Crop images to your desired dimensions.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Image Resize')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Image Resize</h4>
-                        <p class="text-gray-600">Adjust the size of your images.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Image Rotate')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Image Rotate</h4>
-                        <p class="text-gray-600">Rotate images to any angle.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Image Crop Circle')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Image Crop Circle</h4>
-                        <p class="text-gray-600">Crop images into a perfect circle shape.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Image Merge')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Image Merge</h4>
-                        <p class="text-gray-600">Combine multiple images into one.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Photo Signature Resize')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Photo Signature Resize</h4>
-                        <p class="text-gray-600">Resize photo signatures for digital use.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- eBook Tools Section -->
-        <section id="ebook-tools" class="mb-16">
-            <h2 class="text-4xl font-bold text-center mb-10 text-blue-700">eBook Tools</h2>
-
-            <!-- CONVERT FROM EBOOK -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">Convert From eBook</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('eBook to PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">eBook to PDF</h4>
-                        <p class="text-gray-600">Convert various eBook formats to PDF.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('EPUB to PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">EPUB to PDF</h4>
-                        <p class="text-gray-600">Convert EPUB files to PDF documents.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('MOBI to PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">MOBI to PDF</h4>
-                        <p class="text-gray-600">Convert MOBI files to PDF format.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('AZW to PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">AZW to PDF</h4>
-                        <p class="text-gray-600">Convert AZW eBook files to PDF.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('AZW3 to PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">AZW3 to PDF</h4>
-                        <p class="text-gray-600">Convert AZW3 Kindle files to PDF.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('DJVU to PDF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">DJVU to PDF</h4>
-                        <p class="text-gray-600">Convert DJVU documents to PDF.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CONVERT TO EBOOK -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">Convert To eBook</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('PDF to eBook')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">PDF to eBook</h4>
-                        <p class="text-gray-600">Convert PDF documents into various eBook formats.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('PDF to EPUB')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">PDF to EPUB</h4>
-                        <p class="text-gray-600">Convert PDF files to EPUB format.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('PDF to MOBI')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">PDF to MOBI</h4>
-                        <p class="text-gray-600">Convert PDF files to MOBI format.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('PDF to AZW3')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">AZW3 to PDF</h4>
-                        <p class="text-gray-600">Convert PDF files to AZW3 Kindle format.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('PDF to FB2')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">PDF to FB2</h4>
-                        <p class="text-gray-600">Convert PDF files to FB2 eBook format.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('PDF to RTF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">PDF to RTF</h4>
-                        <p class="text-gray-600">Convert PDF files to Rich Text Format.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Other Tools Section -->
-        <section id="other-tools" class="mb-16">
-            <h2 class="text-4xl font-bold text-center mb-10 text-blue-700">Other Tools</h2>
-
-            <!-- CONVERTER -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">Converter</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Image Converter')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Image Converter</h4>
-                        <p class="text-gray-600">Convert between various image formats.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Document Converter')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Document Converter</h4>
-                        <p class="text-gray-600">Convert between different document formats.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Excel Converter')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Excel Converter</h4>
-                        <p class="text-gray-600">Convert Excel files to other formats.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Presentation Converter')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Presentation Converter</h4>
-                        <p class="text-gray-600">Convert presentation files to other formats.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Ebook Converter')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Ebook Converter</h4>
-                        <p class="text-gray-600">Convert between various eBook formats.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Vector Converter')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Vector Converter</h4>
-                        <p class="text-gray-600">Convert vector graphics files.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Cad Converter')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Cad Converter</h4>
-                        <p class="text-gray-600">Convert CAD drawing files.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- GIF -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">GIF Tools</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Images to GIF')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Images to GIF</h4>
-                        <p class="text-gray-600">Create animated GIFs from a series of images.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('GIF to Images')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">GIF to Images</h4>
-                        <p class="text-gray-600">Extract individual frames from a GIF.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ZIP -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">ZIP Tools</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('ZIP Maker')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">ZIP Maker</h4>
-                        <p class="text-gray-600">Create ZIP archives from your files.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('ZIP Extractor')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">ZIP Extractor</h4>
-                        <p class="text-gray-600">Extract files from ZIP archives.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- OTHERS -->
-            <div class="mb-10">
-                <h3 class="text-3xl font-semibold mb-6 text-indigo-600 border-b-2 border-indigo-300 pb-2">Others</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Barcode Generator')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Barcode Generator</h4>
-                        <p class="text-gray-600">Generate various types of barcodes.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Password Generator')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Password Generator</h4>
-                        <p class="text-gray-600">Create strong, random passwords.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Image to Color')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Image to Color</h4>
-                        <p class="text-gray-600">Extract dominant colors from an image.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="handleToolClick('Color Extractor')">
-                        <h4 class="text-xl font-semibold mb-2 text-gray-800">Color Extractor</h4>
-                        <p class="text-gray-600">Identify and extract colors from images.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Tool Page Content (Initially Hidden) -->
-    <div id="tool-page-content" class="container mx-auto px-4 py-16 hidden">
-        <button onclick="showHomePage()" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300 mb-8">
-            &larr; Back to Home
-        </button>
-        <h2 id="tool-page-title" class="text-4xl font-bold text-center mb-10 text-blue-700"></h2>
-        <div id="tool-specific-script" class="bg-white p-8 rounded-xl shadow-lg">
-            <!-- Tool-specific content and interactive elements will be loaded here -->
         </div>
     </div>
 
+    <!-- Tools Grid -->
+    <main class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="toolsGrid">
+            <!-- Image Tools -->
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="image">
+                <div class="text-3xl mb-4">🖼️</div>
+                <h3 class="text-xl font-semibold mb-2">Image Converter</h3>
+                <p class="text-gray-600 mb-4">Convert between JPG, PNG, WebP, and more formats</p>
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Free</span>
+            </div>
+
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="image">
+                <div class="text-3xl mb-4">📏</div>
+                <h3 class="text-xl font-semibold mb-2">Image Resizer</h3>
+                <p class="text-gray-600 mb-4">Resize images while maintaining quality</p>
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Free</span>
+            </div>
+
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="image">
+                <div class="text-3xl mb-4">🗜️</div>
+                <h3 class="text-xl font-semibold mb-2">Image Compressor</h3>
+                <p class="text-gray-600 mb-4">Reduce file size without losing quality</p>
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Free</span>
+            </div>
+
+            <!-- SEO Tools -->
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="seo">
+                <div class="text-3xl mb-4">🔍</div>
+                <h3 class="text-xl font-semibold mb-2">SEO Analyzer</h3>
+                <p class="text-gray-600 mb-4">Analyze your website's SEO performance</p>
+                <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Popular</span>
+            </div>
+
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="seo">
+                <div class="text-3xl mb-4">🔗</div>
+                <h3 class="text-xl font-semibold mb-2">Backlink Checker</h3>
+                <p class="text-gray-600 mb-4">Check backlinks pointing to your site</p>
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Free</span>
+            </div>
+
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="seo">
+                <div class="text-3xl mb-4">📊</div>
+                <h3 class="text-xl font-semibold mb-2">Keyword Density</h3>
+                <p class="text-gray-600 mb-4">Analyze keyword density in your content</p>
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Free</span>
+            </div>
+
+            <!-- Text Utilities -->
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="text">
+                <div class="text-3xl mb-4">📝</div>
+                <h3 class="text-xl font-semibold mb-2">Word Counter</h3>
+                <p class="text-gray-600 mb-4">Count words, characters, and paragraphs</p>
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Free</span>
+            </div>
+
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="text">
+                <div class="text-3xl mb-4">🔤</div>
+                <h3 class="text-xl font-semibold mb-2">Case Converter</h3>
+                <p class="text-gray-600 mb-4">Convert text to uppercase, lowercase, title case</p>
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Free</span>
+            </div>
+
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="text">
+                <div class="text-3xl mb-4">🔄</div>
+                <h3 class="text-xl font-semibold mb-2">Text Replacer</h3>
+                <p class="text-gray-600 mb-4">Find and replace text in bulk</p>
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Free</span>
+            </div>
+
+            <!-- Developer Tools -->
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="developer">
+                <div class="text-3xl mb-4">💻</div>
+                <h3 class="text-xl font-semibold mb-2">JSON Formatter</h3>
+                <p class="text-gray-600 mb-4">Format and validate JSON data</p>
+                <span class="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Dev</span>
+            </div>
+
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="developer">
+                <div class="text-3xl mb-4">🎨</div>
+                <h3 class="text-xl font-semibold mb-2">CSS Minifier</h3>
+                <p class="text-gray-600 mb-4">Minify CSS code for better performance</p>
+                <span class="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Dev</span>
+            </div>
+
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="developer">
+                <div class="text-3xl mb-4">🔐</div>
+                <h3 class="text-xl font-semibold mb-2">Hash Generator</h3>
+                <p class="text-gray-600 mb-4">Generate MD5, SHA1, SHA256 hashes</p>
+                <span class="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Dev</span>
+            </div>
+
+            <!-- Converters -->
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="converter">
+                <div class="text-3xl mb-4">📄</div>
+                <h3 class="text-xl font-semibold mb-2">PDF Converter</h3>
+                <p class="text-gray-600 mb-4">Convert documents to and from PDF</p>
+                <span class="inline-block bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">Popular</span>
+            </div>
+
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="converter">
+                <div class="text-3xl mb-4">🎵</div>
+                <h3 class="text-xl font-semibold mb-2">Audio Converter</h3>
+                <p class="text-gray-600 mb-4">Convert between MP3, WAV, AAC formats</p>
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Free</span>
+            </div>
+
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="converter">
+                <div class="text-3xl mb-4">📐</div>
+                <h3 class="text-xl font-semibold mb-2">Unit Converter</h3>
+                <p class="text-gray-600 mb-4">Convert length, weight, temperature units</p>
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Free</span>
+            </div>
+
+            <!-- Calculators -->
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="calculator">
+                <div class="text-3xl mb-4">🧮</div>
+                <h3 class="text-xl font-semibold mb-2">Percentage Calculator</h3>
+                <p class="text-gray-600 mb-4">Calculate percentages, increases, decreases</p>
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Free</span>
+            </div>
+
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="calculator">
+                <div class="text-3xl mb-4">💰</div>
+                <h3 class="text-xl font-semibold mb-2">Loan Calculator</h3>
+                <p class="text-gray-600 mb-4">Calculate loan payments and interest</p>
+                <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Popular</span>
+            </div>
+
+            <div class="tool-card bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg" data-category="calculator">
+                <div class="text-3xl mb-4">📅</div>
+                <h3 class="text-xl font-semibold mb-2">Age Calculator</h3>
+                <p class="text-gray-600 mb-4">Calculate age in years, months, days</p>
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Free</span>
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-12">
+            <button id="loadMoreBtn" class="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors font-medium">
+                Load More Tools (82 remaining)
+            </button>
+        </div>
+    </main>
+
+    <!-- Features Section -->
+    <section class="bg-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Why Choose Multi Tool Hub?</h2>
+                <p class="text-gray-600 text-lg">Everything you need, all in one place</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl mb-4">🌐</div>
+                    <h3 class="text-xl font-semibold mb-2">Browser-Based</h3>
+                    <p class="text-gray-600">No downloads required. All tools work directly in your browser.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-xl font-semibold mb-2">Mobile-Friendly</h3>
+                    <p class="text-gray-600">Optimized for all devices. Use tools on desktop, tablet, or phone.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-4">🆓</div>
+                    <h3 class="text-xl font-semibold mb-2">100% Free</h3>
+                    <p class="text-gray-600">All tools are completely free to use. No hidden fees or subscriptions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 text-center rounded-t-lg">
-        <div class="container mx-auto px-4">
-            <p>&copy; 2024 Multi Tool Hub. All rights reserved.</p>
-            <p class="text-sm mt-2">Designed with <span class="text-red-500">&hearts;</span> by Your Team</p>
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Multi Tool Hub</h3>
+                    <p class="text-gray-400">Your one-stop destination for free online tools.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Popular Tools</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Image Converter</a></li>
+                        <li><a href="#" class="hover:text-white">SEO Analyzer</a></li>
+                        <li><a href="#" class="hover:text-white">PDF Converter</a></li>
+                        <li><a href="#" class="hover:text-white">Word Counter</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Image Tools</a></li>
+                        <li><a href="#" class="hover:text-white">SEO Tools</a></li>
+                        <li><a href="#" class="hover:text-white">Developer Tools</a></li>
+                        <li><a href="#" class="hover:text-white">Calculators</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Multi Tool Hub. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Message Box for tool activation feedback -->
-    <div id="messageBox"></div>
-
     <script>
-        // JavaScript for mobile menu toggle
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const messageBox = document.getElementById('messageBox');
-            const homeContent = document.getElementById('home-content');
-            const heroSection = document.getElementById('hero-section');
-            const toolPageContent = document.getElementById('tool-page-content');
-            const toolPageTitle = document.getElementById('tool-page-title');
-            const toolSpecificScript = document.getElementById('tool-specific-script');
+        // Category filtering
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const toolCards = document.querySelectorAll('.tool-card');
 
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                categoryTabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
 
-            // Close mobile menu when a link is clicked
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
+                const category = tab.dataset.category;
+                
+                toolCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
                 });
             });
+        });
 
-            // Function to show the home page
-            window.showHomePage = () => {
-                homeContent.classList.remove('hidden');
-                heroSection.classList.remove('hidden'); // Show hero section on home
-                toolPageContent.classList.add('hidden');
-                // Scroll to top or specific section if desired
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            };
-
-            // Function to handle tool clicks and display tool-specific content
-            window.handleToolClick = (toolName) => {
-                // Hide home page content
-                homeContent.classList.add('hidden');
-                heroSection.classList.add('hidden'); // Hide hero section on tool page
-                // Show tool page content
-                toolPageContent.classList.remove('hidden');
-                toolPageTitle.textContent = toolName;
-                toolSpecificScript.innerHTML = ''; // Clear previous tool content
-
-                // Load tool-specific script/UI
-                switch (toolName) {
-                    case 'Compress PDF':
-                        toolSpecificScript.innerHTML = `
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your PDF to compress</h3>
-                            <input type="file" id="fileInput" accept=".pdf" class="block w-full text-sm text-gray-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-blue-50 file:text-blue-700
-                                hover:file:bg-blue-100 mb-4"/>
-                            <button onclick="simulateProcessAndDownload('${toolName}', 'compressed_document.pdf', 'This is a simulated compressed PDF content.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
-                                Upload & Compress PDF
-                            </button>
-                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
-                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
-                        `;
-                        break;
-                    case 'Image to PDF':
-                        toolSpecificScript.innerHTML = `
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your image(s) to convert to PDF</h3>
-                            <input type="file" id="fileInput" accept="image/*" multiple class="block w-full text-sm text-gray-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-blue-50 file:text-blue-700
-                                hover:file:bg-blue-100 mb-4"/>
-                            <button onclick="simulateProcessAndDownload('${toolName}', 'converted_image.pdf', 'This is a simulated PDF created from images.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
-                                Upload & Convert to PDF
-                            </button>
-                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
-                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
-                        `;
-                        break;
-                    case 'PDF to Image':
-                    case 'PDF to JPG':
-                        toolSpecificScript.innerHTML = `
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your PDF to convert to Image</h3>
-                            <input type="file" id="fileInput" accept=".pdf" class="block w-full text-sm text-gray-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-blue-50 file:text-blue-700
-                                hover:file:bg-blue-100 mb-4"/>
-                            <button onclick="simulateProcessAndDownload('${toolName}', 'converted_pdf.jpg', 'This is a simulated JPG created from PDF.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
-                                Upload & Convert to JPG
-                            </button>
-                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
-                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
-                        `;
-                        break;
-                    case 'Password Generator':
-                        toolSpecificScript.innerHTML = `
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Generate a Strong Password</h3>
-                            <div class="mb-4">
-                                <label for="passwordLength" class="block text-sm font-medium text-gray-700">Password Length:</label>
-                                <input type="number" id="passwordLength" value="12" min="6" max="30"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-2"/>
-                            </div>
-                            <button onclick="generatePassword()" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
-                                Generate Password
-                            </button>
-                            <div class="mt-4 p-4 bg-gray-100 rounded-md border border-gray-200">
-                                <p class="text-gray-700">Generated Password:</p>
-                                <p id="generatedPassword" class="font-mono text-lg text-blue-800 break-all"></p>
-                                <button onclick="copyToClipboard('generatedPassword')" class="mt-2 bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 transition duration-200">Copy</button>
-                            </div>
-                        `;
-                        break;
-                    case 'Barcode Generator':
-                        toolSpecificScript.innerHTML = `
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Enter text to generate Barcode</h3>
-                            <input type="text" id="barcodeText" placeholder="Enter text or number" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-2 mb-4"/>
-                            <button onclick="simulateTextProcessing('${toolName}', 'barcode.png', 'This is a simulated barcode image.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
-                                Generate Barcode
-                            </button>
-                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
-                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
-                        `;
-                        break;
-                    case 'Image to Color':
-                    case 'Color Extractor':
-                        toolSpecificScript.innerHTML = `
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your image to extract colors</h3>
-                            <input type="file" id="fileInput" accept="image/*" class="block w-full text-sm text-gray-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-blue-50 file:text-blue-700
-                                hover:file:bg-blue-100 mb-4"/>
-                            <button onclick="simulateProcessAndDownload('${toolName}', 'colors_extracted.txt', 'Simulated extracted colors: #FF0000, #00FF00, #0000FF')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
-                                Process Image
-                            </button>
-                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
-                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
-                        `;
-                        break;
-                    case 'Images to GIF':
-                        toolSpecificScript.innerHTML = `
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload multiple images to create a GIF</h3>
-                            <input type="file" id="fileInput" accept="image/*" multiple class="block w-full text-sm text-gray-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-blue-50 file:text-blue-700
-                                hover:file:bg-blue-100 mb-4"/>
-                            <button onclick="simulateProcessAndDownload('${toolName}', 'animated_output.gif', 'This is a simulated GIF.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
-                                Create GIF
-                            </button>
-                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
-                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
-                        `;
-                        break;
-                    case 'GIF to Images':
-                        toolSpecificScript.innerHTML = `
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your GIF to extract images</h3>
-                            <input type="file" id="fileInput" accept=".gif" class="block w-full text-sm text-gray-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-blue-50 file:text-blue-700
-                                hover:file:bg-blue-100 mb-4"/>
-                            <button onclick="simulateProcessAndDownload('${toolName}', 'extracted_images.zip', 'This is a simulated ZIP of extracted images.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
-                                Extract Images
-                            </button>
-                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
-                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
-                        `;
-                        break;
-                    case 'ZIP Maker':
-                        toolSpecificScript.innerHTML = `
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Select files to create a ZIP archive</h3>
-                            <input type="file" id="fileInput" multiple class="block w-full text-sm text-gray-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-blue-50 file:text-blue-700
-                                hover:file:bg-blue-100 mb-4"/>
-                            <button onclick="simulateProcessAndDownload('${toolName}', 'my_archive.zip', 'This is a simulated ZIP archive.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
-                                Create ZIP
-                            </button>
-                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
-                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
-                        `;
-                        break;
-                    case 'ZIP Extractor':
-                        toolSpecificScript.innerHTML = `
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your ZIP file to extract</h3>
-                            <input type="file" id="fileInput" accept=".zip" class="block w-full text-sm text-gray-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-blue-50 file:text-blue-700
-                                hover:file:bg-blue-100 mb-4"/>
-                            <button onclick="simulateProcessAndDownload('${toolName}', 'extracted_files.txt', 'This is a simulated extraction log.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
-                                Extract ZIP
-                            </button>
-                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
-                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
-                        `;
-                        break;
-                    // Generic file upload for most PDF, Image (compress/convert/edit), and eBook tools
-                    case 'Merge PDF':
-                    case 'Merge PDF and Image':
-                    case 'Split PDF':
-                    case 'Crop PDF Page':
-                    case 'Organize PDF':
-                    case 'Rotate PDF':
-                    case 'Remove PDF Pages':
-                    case 'Extract PDF':
-                    case 'Extract Images':
-                    case 'Add Page Number':
-                    case 'Add Watermark':
-                    case 'JPG to PDF':
-                    case 'Word to PDF':
-                    case 'Powerpoint to PDF':
-                    case 'Excel to PDF':
-                    case 'Text to PDF':
-                    case 'PDF to Word':
-                    case 'PDF to Powerpoint':
-                    case 'PDF to Excel':
-                    case 'PDF to Text':
-                    case 'Unlock PDF':
-                    case 'Protect PDF':
-                    case 'Compress Image':
-                    case 'Compress JPG':
-                    case 'Compress PNG':
-                    case 'Compress JPEG':
-                    case 'Compress WEBP':
-                    case 'Compress HEIC':
-                    case 'Compress BMP':
-                    case 'Image to JPG':
-                    case 'Image to PNG':
-                    case 'Image to JPEG':
-                    case 'Image to WEBP':
-                    case 'WEBP to JPEG':
-                    case 'HEIC to JPEG':
-                    case 'Image Crop':
-                    case 'Image Resize':
-                    case 'Image Rotate':
-                    case 'Image Crop Circle':
-                    case 'Image Merge':
-                    case 'Photo Signature Resize':
-                    case 'eBook to PDF':
-                    case 'EPUB to PDF':
-                    case 'MOBI to PDF':
-                    case 'AZW to PDF':
-                    case 'AZW3 to PDF':
-                    case 'DJVU to PDF':
-                    case 'PDF to eBook':
-                    case 'PDF to EPUB':
-                    case 'PDF to MOBI':
-                    case 'PDF to AZW3':
-                    case 'PDF to FB2':
-                    case 'PDF to RTF':
-                    case 'Image Converter':
-                    case 'Document Converter':
-                    case 'Excel Converter':
-                    case 'Presentation Converter':
-                    case 'Ebook Converter':
-                    case 'Vector Converter':
-                    case 'Cad Converter':
-                        toolSpecificScript.innerHTML = `
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your file(s) for ${toolName}</h3>
-                            <input type="file" id="fileInput" multiple class="block w-full text-sm text-gray-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-blue-50 file:text-blue-700
-                                hover:file:bg-blue-100 mb-4"/>
-                            <button onclick="simulateProcessAndDownload('${toolName}', 'processed_output.txt', 'This is a simulated output for ${toolName}.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
-                                Process File(s)
-                            </button>
-                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
-                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
-                        `;
-                        break;
-                    default:
-                        toolSpecificScript.innerHTML = `
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Welcome to the ${toolName} tool!</h3>
-                            <p class="text-gray-600">This is a placeholder for the actual tool functionality.</p>
-                            <p class="text-gray-600 mt-2">You would implement the specific logic for ${toolName} here.</p>
-                        `;
-                        break;
-                }
-                // Scroll to the top of the tool page
-                toolPageContent.scrollIntoView({ behavior: 'smooth' });
-            };
-
-            // Function to simulate processing and provide a download link
-            window.simulateProcessAndDownload = (toolName, outputFileName, simulatedContent) => {
-                const fileInput = document.getElementById('fileInput');
-                const statusElement = document.getElementById('toolStatus');
-                const downloadLinkContainer = document.getElementById('downloadLinkContainer');
-                downloadLinkContainer.innerHTML = ''; // Clear previous download links
-                downloadLinkContainer.classList.add('hidden');
-
-                if (fileInput && fileInput.files.length > 0) {
-                    const fileNames = Array.from(fileInput.files).map(file => `"${file.name}"`).join(', ');
-                    statusElement.textContent = `Uploading ${fileNames}...`;
-
-                    setTimeout(() => {
-                        statusElement.textContent = `Processing ${fileNames} for ${toolName}...`;
-                        setTimeout(() => {
-                            statusElement.textContent = `${toolName} completed successfully!`;
-
-                            // Create simulated download link
-                            const downloadLink = document.createElement('a');
-                            downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(simulatedContent);
-                            downloadLink.download = outputFileName;
-                            downloadLink.className = 'bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 inline-block mt-4';
-                            downloadLink.textContent = `Download ${outputFileName}`;
-
-                            downloadLinkContainer.appendChild(downloadLink);
-                            downloadLinkContainer.classList.remove('hidden');
-
-                            // Show success message
-                            showMessageBox(`'${outputFileName}' is ready for download!`);
-
-                        }, 1500); // Simulate processing time
-                    }, 1000); // Simulate upload time
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            toolCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
                 } else {
-                    statusElement.textContent = `Please select file(s) for ${toolName}.`;
-                    showMessageBox(`Please select file(s) for ${toolName}.`);
+                    card.style.display = 'none';
                 }
-            };
+            });
+        });
 
-            // Generic function for simulating text input processing and providing a download link
-            window.simulateTextProcessing = (toolName, outputFileName, simulatedContent) => {
-                const textInput = document.getElementById('barcodeText');
-                const statusElement = document.getElementById('toolStatus');
-                const downloadLinkContainer = document.getElementById('downloadLinkContainer');
-                downloadLinkContainer.innerHTML = ''; // Clear previous download links
-                downloadLinkContainer.classList.add('hidden');
+        // Load more functionality
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        let remainingTools = 82;
 
-                if (textInput && textInput.value.trim() !== '') {
-                    statusElement.textContent = `Processing "${textInput.value}" for ${toolName}...`;
-                    setTimeout(() => {
-                        statusElement.textContent = `${toolName} completed for "${textInput.value}"!`;
-
-                        // Create simulated download link
-                        const downloadLink = document.createElement('a');
-                        downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(simulatedContent);
-                        downloadLink.download = outputFileName;
-                        downloadLink.className = 'bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 inline-block mt-4';
-                        downloadLink.textContent = `Download ${outputFileName}`;
-
-                        downloadLinkContainer.appendChild(downloadLink);
-                        downloadLinkContainer.classList.remove('hidden');
-
-                        // Show success message
-                        showMessageBox(`'${outputFileName}' is ready for download!`);
-
-                    }, 1500); // Simulate processing time
-                } else {
-                    statusElement.textContent = `Please enter text for ${toolName}.`;
-                    showMessageBox(`Please enter text for ${toolName}.`);
-                }
-            };
-
-            // Example function for Password Generator
-            window.generatePassword = () => {
-                const length = document.getElementById('passwordLength').value;
-                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
-                let result = '';
-                for (let i = 0; i < length; i++) {
-                    result += characters.charAt(Math.floor(Math.random() * characters.length));
-                }
-                document.getElementById('generatedPassword').textContent = result;
-                showMessageBox('Password generated!');
-            };
-
-            // Function to copy text to clipboard
-            window.copyToClipboard = (elementId) => {
-                const element = document.getElementById(elementId);
-                const textToCopy = element.textContent || element.innerText;
-                const textarea = document.createElement('textarea');
-                textarea.value = textToCopy;
-                document.body.appendChild(textarea);
-                textarea.select();
-                try {
-                    document.execCommand('copy');
-                    showMessageBox('Copied to clipboard!');
-                } catch (err) {
-                    console.error('Failed to copy text: ', err);
-                    showMessageBox('Failed to copy!');
-                }
-                document.body.removeChild(textarea);
-            };
-
-            // Function to show custom message box
-            function showMessageBox(message) {
-                messageBox.textContent = message;
-                messageBox.classList.add('show');
-                setTimeout(() => {
-                    messageBox.classList.remove('show');
-                }, 3000);
+        loadMoreBtn.addEventListener('click', () => {
+            // Simulate loading more tools
+            const toolsToLoad = Math.min(18, remainingTools);
+            remainingTools -= toolsToLoad;
+            
+            if (remainingTools > 0) {
+                loadMoreBtn.textContent = `Load More Tools (${remainingTools} remaining)`;
+            } else {
+                loadMoreBtn.textContent = 'All Tools Loaded';
+                loadMoreBtn.disabled = true;
+                loadMoreBtn.classList.add('opacity-50', 'cursor-not-allowed');
             }
         });
+
+        // Tool card click functionality
+        toolCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const toolName = card.querySelector('h3').textContent;
+                alert(`Opening ${toolName}... (This would navigate to the actual tool)`);
+            });
+        });
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9679f66a74e73c52',t:'MTc1MzkzMjA1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
