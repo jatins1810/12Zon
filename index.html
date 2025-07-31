@@ -575,16 +575,50 @@
                     case 'Compress PDF':
                         toolSpecificScript.innerHTML = `
                             <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your PDF to compress</h3>
-                            <input type="file" id="pdfFileInput" accept=".pdf" class="block w-full text-sm text-gray-500
+                            <input type="file" id="fileInput" accept=".pdf" class="block w-full text-sm text-gray-500
                                 file:mr-4 file:py-2 file:px-4
                                 file:rounded-full file:border-0
                                 file:text-sm file:font-semibold
                                 file:bg-blue-50 file:text-blue-700
                                 hover:file:bg-blue-100 mb-4"/>
-                            <button onclick="compressPdf()" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
-                                Compress PDF
+                            <button onclick="simulateProcessAndDownload('${toolName}', 'compressed_document.pdf', 'This is a simulated compressed PDF content.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
+                                Upload & Compress PDF
                             </button>
-                            <p id="compressionStatus" class="mt-4 text-gray-700"></p>
+                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
+                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
+                        `;
+                        break;
+                    case 'Image to PDF':
+                        toolSpecificScript.innerHTML = `
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your image(s) to convert to PDF</h3>
+                            <input type="file" id="fileInput" accept="image/*" multiple class="block w-full text-sm text-gray-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-blue-50 file:text-blue-700
+                                hover:file:bg-blue-100 mb-4"/>
+                            <button onclick="simulateProcessAndDownload('${toolName}', 'converted_image.pdf', 'This is a simulated PDF created from images.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
+                                Upload & Convert to PDF
+                            </button>
+                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
+                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
+                        `;
+                        break;
+                    case 'PDF to Image':
+                    case 'PDF to JPG':
+                        toolSpecificScript.innerHTML = `
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your PDF to convert to Image</h3>
+                            <input type="file" id="fileInput" accept=".pdf" class="block w-full text-sm text-gray-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-blue-50 file:text-blue-700
+                                hover:file:bg-blue-100 mb-4"/>
+                            <button onclick="simulateProcessAndDownload('${toolName}', 'converted_pdf.jpg', 'This is a simulated JPG created from PDF.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
+                                Upload & Convert to JPG
+                            </button>
+                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
+                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
                         `;
                         break;
                     case 'Password Generator':
@@ -605,7 +639,174 @@
                             </div>
                         `;
                         break;
-                    // Add more cases for other tools as needed
+                    case 'Barcode Generator':
+                        toolSpecificScript.innerHTML = `
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Enter text to generate Barcode</h3>
+                            <input type="text" id="barcodeText" placeholder="Enter text or number" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-2 mb-4"/>
+                            <button onclick="simulateTextProcessing('${toolName}', 'barcode.png', 'This is a simulated barcode image.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
+                                Generate Barcode
+                            </button>
+                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
+                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
+                        `;
+                        break;
+                    case 'Image to Color':
+                    case 'Color Extractor':
+                        toolSpecificScript.innerHTML = `
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your image to extract colors</h3>
+                            <input type="file" id="fileInput" accept="image/*" class="block w-full text-sm text-gray-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-blue-50 file:text-blue-700
+                                hover:file:bg-blue-100 mb-4"/>
+                            <button onclick="simulateProcessAndDownload('${toolName}', 'colors_extracted.txt', 'Simulated extracted colors: #FF0000, #00FF00, #0000FF')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
+                                Process Image
+                            </button>
+                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
+                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
+                        `;
+                        break;
+                    case 'Images to GIF':
+                        toolSpecificScript.innerHTML = `
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload multiple images to create a GIF</h3>
+                            <input type="file" id="fileInput" accept="image/*" multiple class="block w-full text-sm text-gray-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-blue-50 file:text-blue-700
+                                hover:file:bg-blue-100 mb-4"/>
+                            <button onclick="simulateProcessAndDownload('${toolName}', 'animated_output.gif', 'This is a simulated GIF.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
+                                Create GIF
+                            </button>
+                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
+                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
+                        `;
+                        break;
+                    case 'GIF to Images':
+                        toolSpecificScript.innerHTML = `
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your GIF to extract images</h3>
+                            <input type="file" id="fileInput" accept=".gif" class="block w-full text-sm text-gray-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-blue-50 file:text-blue-700
+                                hover:file:bg-blue-100 mb-4"/>
+                            <button onclick="simulateProcessAndDownload('${toolName}', 'extracted_images.zip', 'This is a simulated ZIP of extracted images.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
+                                Extract Images
+                            </button>
+                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
+                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
+                        `;
+                        break;
+                    case 'ZIP Maker':
+                        toolSpecificScript.innerHTML = `
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Select files to create a ZIP archive</h3>
+                            <input type="file" id="fileInput" multiple class="block w-full text-sm text-gray-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-blue-50 file:text-blue-700
+                                hover:file:bg-blue-100 mb-4"/>
+                            <button onclick="simulateProcessAndDownload('${toolName}', 'my_archive.zip', 'This is a simulated ZIP archive.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
+                                Create ZIP
+                            </button>
+                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
+                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
+                        `;
+                        break;
+                    case 'ZIP Extractor':
+                        toolSpecificScript.innerHTML = `
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your ZIP file to extract</h3>
+                            <input type="file" id="fileInput" accept=".zip" class="block w-full text-sm text-gray-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-blue-50 file:text-blue-700
+                                hover:file:bg-blue-100 mb-4"/>
+                            <button onclick="simulateProcessAndDownload('${toolName}', 'extracted_files.txt', 'This is a simulated extraction log.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
+                                Extract ZIP
+                            </button>
+                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
+                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
+                        `;
+                        break;
+                    // Generic file upload for most PDF, Image (compress/convert/edit), and eBook tools
+                    case 'Merge PDF':
+                    case 'Merge PDF and Image':
+                    case 'Split PDF':
+                    case 'Crop PDF Page':
+                    case 'Organize PDF':
+                    case 'Rotate PDF':
+                    case 'Remove PDF Pages':
+                    case 'Extract PDF':
+                    case 'Extract Images':
+                    case 'Add Page Number':
+                    case 'Add Watermark':
+                    case 'JPG to PDF':
+                    case 'Word to PDF':
+                    case 'Powerpoint to PDF':
+                    case 'Excel to PDF':
+                    case 'Text to PDF':
+                    case 'PDF to Word':
+                    case 'PDF to Powerpoint':
+                    case 'PDF to Excel':
+                    case 'PDF to Text':
+                    case 'Unlock PDF':
+                    case 'Protect PDF':
+                    case 'Compress Image':
+                    case 'Compress JPG':
+                    case 'Compress PNG':
+                    case 'Compress JPEG':
+                    case 'Compress WEBP':
+                    case 'Compress HEIC':
+                    case 'Compress BMP':
+                    case 'Image to JPG':
+                    case 'Image to PNG':
+                    case 'Image to JPEG':
+                    case 'Image to WEBP':
+                    case 'WEBP to JPEG':
+                    case 'HEIC to JPEG':
+                    case 'Image Crop':
+                    case 'Image Resize':
+                    case 'Image Rotate':
+                    case 'Image Crop Circle':
+                    case 'Image Merge':
+                    case 'Photo Signature Resize':
+                    case 'eBook to PDF':
+                    case 'EPUB to PDF':
+                    case 'MOBI to PDF':
+                    case 'AZW to PDF':
+                    case 'AZW3 to PDF':
+                    case 'DJVU to PDF':
+                    case 'PDF to eBook':
+                    case 'PDF to EPUB':
+                    case 'PDF to MOBI':
+                    case 'PDF to AZW3':
+                    case 'PDF to FB2':
+                    case 'PDF to RTF':
+                    case 'Image Converter':
+                    case 'Document Converter':
+                    case 'Excel Converter':
+                    case 'Presentation Converter':
+                    case 'Ebook Converter':
+                    case 'Vector Converter':
+                    case 'Cad Converter':
+                        toolSpecificScript.innerHTML = `
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Upload your file(s) for ${toolName}</h3>
+                            <input type="file" id="fileInput" multiple class="block w-full text-sm text-gray-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-blue-50 file:text-blue-700
+                                hover:file:bg-blue-100 mb-4"/>
+                            <button onclick="simulateProcessAndDownload('${toolName}', 'processed_output.txt', 'This is a simulated output for ${toolName}.')" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300">
+                                Process File(s)
+                            </button>
+                            <p id="toolStatus" class="mt-4 text-gray-700"></p>
+                            <div id="downloadLinkContainer" class="mt-4 hidden"></div>
+                        `;
+                        break;
                     default:
                         toolSpecificScript.innerHTML = `
                             <h3 class="text-2xl font-semibold mb-4 text-gray-800">Welcome to the ${toolName} tool!</h3>
@@ -618,18 +819,74 @@
                 toolPageContent.scrollIntoView({ behavior: 'smooth' });
             };
 
-            // Example function for Compress PDF (placeholder)
-            window.compressPdf = () => {
-                const fileInput = document.getElementById('pdfFileInput');
-                const statusElement = document.getElementById('compressionStatus');
-                if (fileInput.files.length > 0) {
-                    statusElement.textContent = `Compressing "${fileInput.files[0].name}"... (This is a simulation)`;
-                    // In a real app, you would send the file to a backend or use a client-side library
+            // Function to simulate processing and provide a download link
+            window.simulateProcessAndDownload = (toolName, outputFileName, simulatedContent) => {
+                const fileInput = document.getElementById('fileInput');
+                const statusElement = document.getElementById('toolStatus');
+                const downloadLinkContainer = document.getElementById('downloadLinkContainer');
+                downloadLinkContainer.innerHTML = ''; // Clear previous download links
+                downloadLinkContainer.classList.add('hidden');
+
+                if (fileInput && fileInput.files.length > 0) {
+                    const fileNames = Array.from(fileInput.files).map(file => `"${file.name}"`).join(', ');
+                    statusElement.textContent = `Uploading ${fileNames}...`;
+
                     setTimeout(() => {
-                        statusElement.textContent = `"${fileInput.files[0].name}" compressed successfully! (Simulated)`;
-                    }, 2000);
+                        statusElement.textContent = `Processing ${fileNames} for ${toolName}...`;
+                        setTimeout(() => {
+                            statusElement.textContent = `${toolName} completed successfully!`;
+
+                            // Create simulated download link
+                            const downloadLink = document.createElement('a');
+                            downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(simulatedContent);
+                            downloadLink.download = outputFileName;
+                            downloadLink.className = 'bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 inline-block mt-4';
+                            downloadLink.textContent = `Download ${outputFileName}`;
+
+                            downloadLinkContainer.appendChild(downloadLink);
+                            downloadLinkContainer.classList.remove('hidden');
+
+                            // Show success message
+                            showMessageBox(`'${outputFileName}' is ready for download!`);
+
+                        }, 1500); // Simulate processing time
+                    }, 1000); // Simulate upload time
                 } else {
-                    statusElement.textContent = 'Please select a PDF file to compress.';
+                    statusElement.textContent = `Please select file(s) for ${toolName}.`;
+                    showMessageBox(`Please select file(s) for ${toolName}.`);
+                }
+            };
+
+            // Generic function for simulating text input processing and providing a download link
+            window.simulateTextProcessing = (toolName, outputFileName, simulatedContent) => {
+                const textInput = document.getElementById('barcodeText');
+                const statusElement = document.getElementById('toolStatus');
+                const downloadLinkContainer = document.getElementById('downloadLinkContainer');
+                downloadLinkContainer.innerHTML = ''; // Clear previous download links
+                downloadLinkContainer.classList.add('hidden');
+
+                if (textInput && textInput.value.trim() !== '') {
+                    statusElement.textContent = `Processing "${textInput.value}" for ${toolName}...`;
+                    setTimeout(() => {
+                        statusElement.textContent = `${toolName} completed for "${textInput.value}"!`;
+
+                        // Create simulated download link
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(simulatedContent);
+                        downloadLink.download = outputFileName;
+                        downloadLink.className = 'bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 inline-block mt-4';
+                        downloadLink.textContent = `Download ${outputFileName}`;
+
+                        downloadLinkContainer.appendChild(downloadLink);
+                        downloadLinkContainer.classList.remove('hidden');
+
+                        // Show success message
+                        showMessageBox(`'${outputFileName}' is ready for download!`);
+
+                    }, 1500); // Simulate processing time
+                } else {
+                    statusElement.textContent = `Please enter text for ${toolName}.`;
+                    showMessageBox(`Please enter text for ${toolName}.`);
                 }
             };
 
@@ -642,6 +899,7 @@
                     result += characters.charAt(Math.floor(Math.random() * characters.length));
                 }
                 document.getElementById('generatedPassword').textContent = result;
+                showMessageBox('Password generated!');
             };
 
             // Function to copy text to clipboard
@@ -654,17 +912,22 @@
                 textarea.select();
                 try {
                     document.execCommand('copy');
-                    messageBox.textContent = 'Copied to clipboard!';
-                    messageBox.classList.add('show');
-                    setTimeout(() => { messageBox.classList.remove('show'); }, 2000);
+                    showMessageBox('Copied to clipboard!');
                 } catch (err) {
                     console.error('Failed to copy text: ', err);
-                    messageBox.textContent = 'Failed to copy!';
-                    messageBox.classList.add('show');
-                    setTimeout(() => { messageBox.classList.remove('show'); }, 2000);
+                    showMessageBox('Failed to copy!');
                 }
                 document.body.removeChild(textarea);
             };
+
+            // Function to show custom message box
+            function showMessageBox(message) {
+                messageBox.textContent = message;
+                messageBox.classList.add('show');
+                setTimeout(() => {
+                    messageBox.classList.remove('show');
+                }, 3000);
+            }
         });
     </script>
 </body>
