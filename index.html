@@ -3,200 +3,952 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Multi Tool Hub - Your one-stop solution for all online tools. Converters, calculators, generators and more.">
-    <meta name="keywords" content="online tools, converters, calculators, generators, utilities">
-    <title>Multi Tool Hub - All Your Essential Tools in One Place</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Multi Tool Hub - All-in-One Online Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #6c5ce7;
+            --dark-color: #2d3436;
+            --light-color: #f5f6fa;
+            --success-color: #00b894;
+            --danger-color: #d63031;
+            --warning-color: #fdcb6e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(74, 107, 255, 0.2);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 60px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-category {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .tool-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .tool-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .tool-category h3 i {
+            margin-right: 10px;
+        }
+
+        .tool-list {
+            list-style: none;
+        }
+
+        .tool-list li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .tool-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .tool-list a {
+            color: #555;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .tool-list a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .tool-list i {
+            margin-right: 8px;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        .step p {
+            color: #666;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 60px 0;
+            background-color: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin-right: 15px;
+            overflow: hidden;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+
+        .author-info p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary-color);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .step {
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav {
+                margin-top: 20px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .search-input {
+                padding: 12px 15px;
+            }
+            
+            .search-btn {
+                padding: 8px 15px;
+            }
+            
+            .step {
+                min-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="#" class="logo">Multi Tool Hub</a>
-                <ul class="nav-menu">
-                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="#tools" class="nav-link">Tools</a></li>
-                    <li class="nav-item"><a href="#testimonials" class="nav-link">Testimonials</a></li>
-                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-tools"></i>
+                <span>Multi Tool Hub</span>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#features">Tools</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#cta">Get Started</a></li>
                 </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
             </nav>
         </div>
     </header>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>All Your Essential Tools in One Place</h1>
-                    <p>Save time and boost productivity with our comprehensive collection of online tools for all your needs.</p>
-                    <a href="#tools" class="btn btn-primary">Explore Tools</a>
-                </div>
-                <div class="hero-image">
-                    <img src="images/hero-bg.jpg" alt="Multi Tool Hub interface showing various tools" loading="lazy">
-                </div>
-            </div>
-        </section>
-
-        <section id="tools" class="tools-section">
-            <div class="container">
-                <h2>Our Powerful Tools</h2>
-                <p class="section-description">Discover our wide range of tools designed to make your life easier</p>
-                
-                <div class="tools-carousel">
-                    <button class="carousel-btn prev" aria-label="Previous tool">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    
-                    <div class="tools-container">
-                        <div class="tool-card">
-                            <img src="images/tool1.jpg" alt="File Converter Tool" loading="lazy">
-                            <h3>File Converter</h3>
-                            <p>Convert between various file formats including PDF, Word, Excel, and images with just a few clicks.</p>
-                            <a href="#" class="btn btn-secondary">Try Now</a>
-                        </div>
-                        <div class="tool-card">
-                            <img src="images/tool2.jpg" alt="Password Generator Tool" loading="lazy">
-                            <h3>Password Generator</h3>
-                            <p>Create strong, secure passwords instantly with customizable length and character options.</p>
-                            <a href="#" class="btn btn-secondary">Try Now</a>
-                        </div>
-                        <div class="tool-card">
-                            <img src="images/tool3.jpg" alt="Unit Converter Tool" loading="lazy">
-                            <h3>Unit Converter</h3>
-                            <p>Convert between different units of measurement for length, weight, temperature and more.</p>
-                            <a href="#" class="btn btn-secondary">Try Now</a>
-                        </div>
-                        <div class="tool-card">
-                            <img src="images/tool4.jpg" alt="QR Code Generator Tool" loading="lazy">
-                            <h3>QR Code Generator</h3>
-                            <p>Generate customizable QR codes for URLs, contact information, WiFi credentials and more.</p>
-                            <a href="#" class="btn btn-secondary">Try Now</a>
-                        </div>
-                    </div>
-                    
-                    <button class="carousel-btn next" aria-label="Next tool">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-                
-                <div class="carousel-indicators">
-                    <button class="indicator active" aria-label="Slide 1"></button>
-                    <button class="indicator" aria-label="Slide 2"></button>
-                    <button class="indicator" aria-label="Slide 3"></button>
-                    <button class="indicator" aria-label="Slide 4"></button>
-                </div>
-            </div>
-        </section>
-
-        <section id="testimonials" class="testimonials-section">
-            <div class="container">
-                <h2>What Our Users Say</h2>
-                <p class="section-description">Trusted by thousands of users worldwide</p>
-                
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"Multi Tool Hub has saved me countless hours of work. The file converter is my favorite - it's so fast and reliable!"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="images/avatar1.jpg" alt="Sarah Johnson" loading="lazy">
-                            <div>
-                                <h4>Sarah Johnson</h4>
-                                <span>Freelance Designer</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"As a developer, I use the password generator daily. The interface is clean and the tools just work. Highly recommended!"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="images/avatar2.jpg" alt="Michael Chen" loading="lazy">
-                            <div>
-                                <h4>Michael Chen</h4>
-                                <span>Software Engineer</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"I've tried many online tools but Multi Tool Hub stands out for its simplicity and comprehensive feature set. The unit converter is a lifesaver!"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="images/avatar3.jpg" alt="Emma Rodriguez" loading="lazy">
-                            <div>
-                                <h4>Emma Rodriguez</h4>
-                                <span>Small Business Owner</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer id="contact" class="footer">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <h3>Multi Tool Hub</h3>
-                    <p>Your one-stop solution for all online tools. We provide free, reliable tools to help you work smarter and faster.</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#tools">Tools</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+            <h1>All Your File Conversion & Editing Needs in One Place</h1>
+            <p>Multi Tool Hub offers a comprehensive suite of free online tools for PDF, image, document, and ebook conversion, editing, and optimization.</p>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search for a tool...">
+                <button class="search-btn">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Comprehensive Tool Collection</h2>
+                <p>Discover hundreds of free online tools to handle all your file conversion and editing needs</p>
+            </div>
+            
+            <div class="tools-grid">
+                <!-- PDF Tools -->
+                <div class="tool-category">
+                    <h3><i class="fas fa-file-pdf"></i> PDF Tools</h3>
+                    <ul class="tool-list">
+                        <li><a href="#"><i class="fas fa-compress-alt"></i> Compress PDF</a></li>
+                        <li><a href="#"><i class="fas fa-object-group"></i> Merge PDF</a></li>
+                        <li><a href="#"><i class="fas fa-image"></i> Merge PDF and Image</a></li>
+                        <li><a href="#"><i class="fas fa-cut"></i> Split PDF</a></li>
+                        <li><a href="#"><i class="fas fa-crop"></i> Crop PDF Page</a></li>
+                        <li><a href="#"><i class="fas fa-sort-alpha-down"></i> Organize PDF</a></li>
+                        <li><a href="#"><i class="fas fa-sync-alt"></i> Rotate PDF</a></li>
+                        <li><a href="#"><i class="fas fa-trash-alt"></i> Remove PDF Pages</a></li>
+                        <li><a href="#"><i class="fas fa-file-export"></i> Extract PDF</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> Extract Images</a></li>
+                        <li><a href="#"><i class="fas fa-sort-numeric-up"></i> Add Page Number</a></li>
+                        <li><a href="#"><i class="fas fa-stamp"></i> Add Watermark</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-contact">
-                    <h4>Contact Us</h4>
-                    <form id="contactForm" class="contact-form">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
-                            <span class="error-message"></span>
+                <!-- Convert To PDF -->
+                <div class="tool-category">
+                    <h3><i class="fas fa-exchange-alt"></i> Convert To PDF</h3>
+                    <ul class="tool-list">
+                        <li><a href="#"><i class="fas fa-image"></i> Image to PDF</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> JPG to PDF</a></li>
+                        <li><a href="#"><i class="fas fa-file-word"></i> Word to PDF</a></li>
+                        <li><a href="#"><i class="fas fa-file-powerpoint"></i> Powerpoint to PDF</a></li>
+                        <li><a href="#"><i class="fas fa-file-excel"></i> Excel to PDF</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Text to PDF</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Convert From PDF -->
+                <div class="tool-category">
+                    <h3><i class="fas fa-exchange-alt"></i> Convert From PDF</h3>
+                    <ul class="tool-list">
+                        <li><a href="#"><i class="fas fa-image"></i> PDF to Image</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> PDF to JPG</a></li>
+                        <li><a href="#"><i class="fas fa-file-word"></i> PDF to Word</a></li>
+                        <li><a href="#"><i class="fas fa-file-powerpoint"></i> PDF to Powerpoint</a></li>
+                        <li><a href="#"><i class="fas fa-file-excel"></i> PDF to Excel</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> PDF to Text</a></li>
+                    </ul>
+                </div>
+                
+                <!-- PDF Security -->
+                <div class="tool-category">
+                    <h3><i class="fas fa-lock"></i> PDF Security</h3>
+                    <ul class="tool-list">
+                        <li><a href="#"><i class="fas fa-unlock"></i> Unlock PDF</a></li>
+                        <li><a href="#"><i class="fas fa-lock"></i> Protect PDF</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Image Tools -->
+                <div class="tool-category">
+                    <h3><i class="fas fa-image"></i> Image Tools</h3>
+                    <ul class="tool-list">
+                        <li><a href="#"><i class="fas fa-compress-alt"></i> Compress Image</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> Compress JPG</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> Compress PNG</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> Compress JPEG</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> Compress WEBP</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> Compress HEIC</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> Compress BMP</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Convert Image -->
+                <div class="tool-category">
+                    <h3><i class="fas fa-exchange-alt"></i> Convert Image</h3>
+                    <ul class="tool-list">
+                        <li><a href="#"><i class="fas fa-file-image"></i> Image to JPG</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> Image to PNG</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> Image to JPEG</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> Image to WEBP</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> WEBP to JPEG</a></li>
+                        <li><a href="#"><i class="fas fa-file-image"></i> HEIC to JPEG</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Edit Image -->
+                <div class="tool-category">
+                    <h3><i class="fas fa-edit"></i> Edit Image</h3>
+                    <ul class="tool-list">
+                        <li><a href="#"><i class="fas fa-crop"></i> Image Crop</a></li>
+                        <li><a href="#"><i class="fas fa-expand"></i> Image Resize</a></li>
+                        <li><a href="#"><i class="fas fa-sync-alt"></i> Image Rotate</a></li>
+                        <li><a href="#"><i class="fas fa-circle"></i> Image Crop Circle</a></li>
+                        <li><a href="#"><i class="fas fa-object-group"></i> Image Merge</a></li>
+                        <li><a href="#"><i class="fas fa-signature"></i> Photo Signature Resize</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Ebook Tools -->
+                <div class="tool-category">
+                    <h3><i class="fas fa-book-open"></i> Ebook Tools</h3>
+                    <ul class="tool-list">
+                        <li><a href="#"><i class="fas fa-file-pdf"></i> eBook to PDF</a></li>
+                        <li><a href="#"><i class="fas fa-file-pdf"></i> EPUB to PDF</a></li>
+                        <li><a href="#"><i class="fas fa-file-pdf"></i> MOBI to PDF</a></li>
+                        <li><a href="#"><i class="fas fa-file-pdf"></i> AZW to PDF</a></li>
+                        <li><a href="#"><i class="fas fa-file-pdf"></i> AZW3 to PDF</a></li>
+                        <li><a href="#"><i class="fas fa-file-pdf"></i> DJVU to PDF</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> PDF to eBook</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> PDF to EPUB</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> PDF to MOBI</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> PDF to AZW3</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> PDF to FB2</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> PDF to RTF</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Other Tools -->
+                <div class="tool-category">
+                    <h3><i class="fas fa-cubes"></i> Other Tools</h3>
+                    <ul class="tool-list">
+                        <li><a href="#"><i class="fas fa-exchange-alt"></i> Image Converter</a></li>
+                        <li><a href="#"><i class="fas fa-exchange-alt"></i> Document Converter</a></li>
+                        <li><a href="#"><i class="fas fa-exchange-alt"></i> Excel Converter</a></li>
+                        <li><a href="#"><i class="fas fa-exchange-alt"></i> Presentation Converter</a></li>
+                        <li><a href="#"><i class="fas fa-exchange-alt"></i> Ebook Converter</a></li>
+                        <li><a href="#"><i class="fas fa-exchange-alt"></i> Vector Converter</a></li>
+                        <li><a href="#"><i class="fas fa-exchange-alt"></i> Cad Converter</a></li>
+                        <li><a href="#"><i class="fas fa-film"></i> Images to GIF</a></li>
+                        <li><a href="#"><i class="fas fa-images"></i> GIF to Images</a></li>
+                        <li><a href="#"><i class="fas fa-file-archive"></i> ZIP Maker</a></li>
+                        <li><a href="#"><i class="fas fa-file-archive"></i> ZIP Extractor</a></li>
+                        <li><a href="#"><i class="fas fa-barcode"></i> Barcode Generator</a></li>
+                        <li><a href="#"><i class="fas fa-key"></i> Password Generator</a></li>
+                        <li><a href="#"><i class="fas fa-palette"></i> Image to Color</a></li>
+                        <li><a href="#"><i class="fas fa-eye-dropper"></i> Color Extractor</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Using our tools is simple and straightforward. Just follow these easy steps</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <h3>Upload Your File</h3>
+                    <p>Select and upload the file you want to convert, edit or optimize from your device or cloud storage.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>Process Your File</h3>
+                    <p>Choose your desired settings and let our powerful tools process your file in seconds.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>Download Result</h3>
+                    <p>Download your processed file to your device or save it directly to your cloud storage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Users Say</h2>
+                <p>Don't just take our word for it. Here's what our users have to say about Multi Tool Hub</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="testimonial-text">"I use Multi Tool Hub daily for my business. The PDF tools are incredibly powerful and save me hours of work each week. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah Johnson">
                         </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
-                            <span class="error-message"></span>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Marketing Director</p>
                         </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Your Message" rows="3" required></textarea>
-                            <span class="error-message"></span>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">"As a student, I need to convert files frequently. Multi Tool Hub has all the tools I need in one place, and it's completely free. Amazing service!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>University Student</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">"The image conversion and compression tools are the best I've found online. I've replaced several paid apps with Multi Tool Hub and couldn't be happier."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Emma Rodriguez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Emma Rodriguez</h4>
+                            <p>Photographer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <h2>Ready to Simplify Your Workflow?</h2>
+            <p>Join millions of users who trust Multi Tool Hub for all their file conversion and editing needs. No registration required - start using our tools right away!</p>
+            <a href="#features" class="cta-btn">Explore All Tools</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Multi Tool Hub</h3>
+                    <p>Your all-in-one solution for file conversion, editing and optimization. Fast, secure and completely free to use.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>PDF Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Compress PDF</a></li>
+                        <li><a href="#">Merge PDF</a></li>
+                        <li><a href="#">Split PDF</a></li>
+                        <li><a href="#">Convert to PDF</a></li>
+                        <li><a href="#">Convert from PDF</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Image Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Compress Image</a></li>
+                        <li><a href="#">Convert Image</a></li>
+                        <li><a href="#">Edit Image</a></li>
+                        <li><a href="#">Images to GIF</a></li>
+                        <li><a href="#">GIF to Images</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Other Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Ebook Tools</a></li>
+                        <li><a href="#">ZIP Tools</a></li>
+                        <li><a href="#">Barcode Generator</a></li>
+                        <li><a href="#">Password Generator</a></li>
+                        <li><a href="#">Color Tools</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; <span id="year"></span> Multi Tool Hub. All rights reserved.</p>
+                <p>&copy; 2023 Multi Tool Hub. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="js/script.min.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                }
+            });
+        });
+        
+        // Search Functionality
+        const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
+        
+        searchBtn.addEventListener('click', () => {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            if (searchTerm) {
+                // In a real implementation, this would search through tools and display results
+                alert(`Searching for: ${searchTerm}\nThis would show matching tools in a real implementation.`);
+            }
+        });
+        
+        // Allow search on Enter key
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchBtn.click();
+            }
+        });
+        
+        // Tool category hover effect enhancement
+        const toolCategories = document.querySelectorAll('.tool-category');
+        toolCategories.forEach(category => {
+            category.addEventListener('mouseenter', () => {
+                category.style.transform = 'translateY(-5px)';
+                category.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
+                category.style.borderColor = 'var(--primary-color)';
+            });
+            
+            category.addEventListener('mouseleave', () => {
+                category.style.transform = '';
+                category.style.boxShadow = '';
+                category.style.borderColor = '';
+            });
+        });
+    </script>
 </body>
 </html>
